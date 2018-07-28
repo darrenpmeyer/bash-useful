@@ -36,4 +36,4 @@ then
    fi
 fi   
 
-cat "$keypath" | ssh "$hostspec" 'mkdir -p .ssh ; cat >> .ssh/authorized_keys ; chmod 0600 .ssh/authorized_keys'
+cat "$keypath" | ssh "$hostspec" 'mkdir -p .ssh ; chmod 0700 .ssh ; cat >> .ssh/authorized_keys ; chmod 0644 .ssh/authorized_keys'
