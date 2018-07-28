@@ -1,0 +1,19 @@
+# function to toggle and get status of spotlight indexing
+
+spotlight() {
+	if [[ "$1" == "on" ]]; then
+		sudo mdutil -a -i on
+	elif [[ "$1" == "off" ]]; then
+		sudo mdutil -a -i off
+	elif [[ -z "$1" ]]; then
+		if mdutil -s / | grep -q 'enabled' ; then
+			>&2 echo "Indexing on."
+		else
+			>&2 echo "Indexing off."
+			return 1  # this way you can use 'if spotlight', and it'll fail if indexing is off
+		fi
+	else
+		>&2 echo "Invalid command '$1'. Usage: "
+		>&2 echo "  $0 [on|off]"
+	fi
+}
